@@ -122,7 +122,7 @@ python-decouple==3.8
 pytz==2023.3.post1
 pyu2f==0.1.5
 #pywin32==305.1
-pywin32
+#pywin32
 PyYAML==6.0
 pyzmq==23.2.1
 referencing==0.31.0
