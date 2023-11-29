@@ -276,7 +276,7 @@ st.title("AGI Market Analytics")
 
 fig_placeholder = st.container()
 
-gauge_plot = create_gauge_plot(current_state=current_state, previous_state=previous_state)
+gauge_plot = create_gauge_plot(current_state, previous_state=previous_state)
 with fig_placeholder:
     st.plotly_chart(gauge_plot, theme='streamlit', use_container_width=True)
 
