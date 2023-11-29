@@ -24,9 +24,10 @@ mkl-random
 mkl-service==2.4.0
 numexpr==2.8.7
 #numpy==1.26.0
-numpy>=1.26.0
+numpy>=1.24.3
 packaging==23.2
-pandas==2.1.1
+#pandas==2.1.1
+pandas>=2.0.0
 Pillow==10.1.0
 pip==23.3.1
 plotly==5.18.0
