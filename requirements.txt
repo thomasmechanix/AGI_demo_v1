@@ -23,7 +23,8 @@ mkl-fft
 mkl-random
 mkl-service==2.4.0
 numexpr==2.8.7
-numpy==1.26.0
+#numpy==1.26.0
+numpy>=1.26.0
 packaging==23.2
 pandas==2.1.1
 Pillow==10.1.0
