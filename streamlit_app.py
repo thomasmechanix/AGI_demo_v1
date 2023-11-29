@@ -153,8 +153,10 @@ def load_feature_data():
     # Using '\s{2,}' as the delimiter to match two or more whitespace characters
     today_top_features_df = pd.read_csv(StringIO(top_features_20231030_str), sep='\s{2,}', engine='python')
 
-    #print(today_top_features_df.head())  # Displaying the first few rows of the DataFrame
-    #print(previous_top_features_df.head())  # Displaying the first few rows of the DataFrame
+    today_top_features_df.index.name = 'Rank'
+    today_top_features_df.columns = ['Feature', 'Shap', 'Type']
+    previous_top_features_df.index.name = 'Rank'
+    previous_top_features_df.columns = ['Feature', 'Shap', 'Type']
     return today_top_features_df, previous_top_features_df
 
 def create_gauge_plot(state, previous_state):
@@ -203,10 +205,10 @@ def create_gauge_plot(state, previous_state):
 
 
 ############## define demo data ##############
-fake_current_state = 1
+current_state = 1
 previous_state = 2
-n_days_prediction_df =  (
-    pd.DataFrame(data = {
+n_days_prediction_df = (
+    pd.DataFrame(data={
     '1D': [0],
     '3D': [1],
     '5D': [0],
@@ -217,12 +219,7 @@ n_days_prediction_df =  (
 
 #from signal_rnd.gen2_macro_signals.thomas_xgboost.AGI.df_2_string import load_feature_data
 today_top_features_df, previous_top_features_df = load_feature_data()
-today_top_features_df.index.name='Rank'
-today_top_features_df.columns = ['Feature','Shap','Type']
-previous_top_features_df.index.name='Rank'
-previous_top_features_df.columns = ['Feature','Shap','Type']
-
-st.set_page_config(page_title='AGI Market Analytics by MechaniX Ltd', page_icon='📊', layout='wide')
+st.set_page_config(page_title='AGI Market Analytics by MechaniX Ltd.', page_icon='📊', layout='wide')
 
 
 def diff_dataframes_rank(current_df_, previous_df):
@@ -253,27 +250,9 @@ def diff_dataframes_rank(current_df_, previous_df):
 
     return result_df
 
-def diff_dataframes(current_df, previous_df):
-    # Ensure that the 'Feature' column is the same in both DataFrames for a valid comparison
-    #if not current_df['Feature'].equals(previous_df['Feature']):
-    #    raise ValueError("The Feature columns in both DataFrames must be identical.")
-
-    # Calculate the difference in 'Shap' values
-    diff_shap = current_df['Shap'] - previous_df['Shap']
-
-    # Create the resulting DataFrame
-    ascending_df = pd.DataFrame({
-        'Feature': current_df['Feature'],
-        'Type': current_df['Type'],
-        'Shap_Difference': diff_shap
-    })
-
-    # Sort by 'Shap_Difference' in descending order
-    ascending_df.sort_values(by='Shap_Difference', ascending=False, inplace=True)
-
-    return ascending_df
 
 def make_feature_leader_board(today_top_features_df, previous_top_features_df):
+
     ascending_df = diff_dataframes_rank(current_df_ = today_top_features_df, previous_df = previous_top_features_df)
     col1, col2, col3 = st.columns(3)
     with col1:
@@ -297,12 +276,11 @@ st.title("AGI Market Analytics")
 
 fig_placeholder = st.container()
 
-gauge_plot = create_gauge_plot(fake_current_state, previous_state=previous_state)
+gauge_plot = create_gauge_plot(current_state=current_state, previous_state=previous_state)
 with fig_placeholder:
     st.plotly_chart(gauge_plot, theme='streamlit', use_container_width=True)
 
-
-
+st.write('Data as of 2022-10-30 00:00:00 EST, target index S&P500.')
 st.divider()
 
 # N day ahead forecast
