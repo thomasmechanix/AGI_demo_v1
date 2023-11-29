@@ -1,15 +1,15 @@
 import streamlit as st
-from st_aggrid import AgGrid
+#from st_aggrid import AgGrid
 import pandas as pd
 import plotly.graph_objects as go
 
 ########### langchain related imports ##############
-from langchain.agents import ConversationalChatAgent, AgentExecutor
-from langchain.callbacks import StreamlitCallbackHandler
-from langchain.chat_models import ChatOpenAI
-from langchain.memory import ConversationBufferMemory
-from langchain.memory.chat_message_histories import StreamlitChatMessageHistory
-from langchain.tools import DuckDuckGoSearchRun
+# from langchain.agents import ConversationalChatAgent, AgentExecutor
+# from langchain.callbacks import StreamlitCallbackHandler
+# from langchain.chat_models import ChatOpenAI
+# from langchain.memory import ConversationBufferMemory
+# from langchain.memory.chat_message_histories import StreamlitChatMessageHistory
+# from langchain.tools import DuckDuckGoSearchRun
 ####################################################
 def load_demo_article():
     stuff_to_show = """Employment Data Signals Bullish Trend for U.S. Equities\n
@@ -153,8 +153,8 @@ def load_feature_data():
     # Using '\s{2,}' as the delimiter to match two or more whitespace characters
     today_top_features_df = pd.read_csv(StringIO(top_features_20231030_str), sep='\s{2,}', engine='python')
 
-    print(today_top_features_df.head())  # Displaying the first few rows of the DataFrame
-    print(previous_top_features_df.head())  # Displaying the first few rows of the DataFrame
+    #print(today_top_features_df.head())  # Displaying the first few rows of the DataFrame
+    #print(previous_top_features_df.head())  # Displaying the first few rows of the DataFrame
     return today_top_features_df, previous_top_features_df
 
 def create_gauge_plot(state, previous_state):

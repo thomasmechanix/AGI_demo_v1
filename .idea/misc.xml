@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="Bloomsbury_Alphalens" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="streamlit_AGI_TEST_env" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="AGI_demo_v1" project-jdk-type="Python SDK" />
 </project>
